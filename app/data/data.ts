@@ -125,12 +125,14 @@ export const certifications = [
         issuer: "NPTEL",
         icon: "☕",
         color: "from-orange-500/20 to-amber-500/10",
+        url: "/Programming In Java.pdf",
     },
     {
         title: "Data Analyst",
         issuer: "IBM (Coursera)",
         icon: "📊",
         color: "from-blue-500/20 to-cyan-500/10",
+        url: "/Coursera K8PKCM1Z02WC.pdf",
     },
     {
         title: "AI Revolution in Payment",
