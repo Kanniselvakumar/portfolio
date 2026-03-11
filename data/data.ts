@@ -53,7 +53,7 @@ export const projects = [
         id: 1,
         title: "FitGuard – AI Fitness & Health Monitor",
         description:
-          "A smart fitness monitoring web app that tracks workouts, analyzes health metrics, and provides personalized AI-driven recommendations to help users stay on top of their fitness goals.",
+            "A smart fitness monitoring web app that tracks workouts, analyzes health metrics, and provides personalized AI-driven recommendations to help users stay on top of their fitness goals.",
         tags: ["Python", "Flask", "MySQL", "HTML5", "CSS3", "JavaScript"],
         github: "https://github.com/Kanniselvakumar/fitguard-ai-athlete-injury-monitoring",
         live: "",
