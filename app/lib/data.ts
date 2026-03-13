@@ -45,9 +45,9 @@ export function getPortfolioContext(): string {
         ", " +
         e.location +
         " (" +
-        e.period +
+        (e.period || (e.current ? "Current" : "")) +
         ") | Score: " +
-        e.score
+        (e.score || "N/A")
       );
     })
     .join("\n");
@@ -56,35 +56,29 @@ export function getPortfolioContext(): string {
     .map((c) => "  • " + c.title + " by " + c.issuer)
     .join("\n");
 
-  return `
-PORTFOLIO DATA FOR ${personalInfo.name.toUpperCase()}
-═══════════════════════════════════
-
-── IDENTITY ──
-Name:     ${personalInfo.name}
-Role:     ${personalInfo.title}
-Tagline:  ${personalInfo.tagline}
-
-── ABOUT ──
-${personalInfo.bio}
-
-── SKILLS ──
-${skillsList}
-
-── PROJECTS ──
-${projectList}
-
-── EDUCATION ──
-${educationList}
-
-── CERTIFICATIONS ──
-${certificationList}
-
-── CONTACT ──
-Email:    ${personalInfo.email}
-Phone:    ${personalInfo.phone}
-Location: ${personalInfo.location}
-GitHub:   ${personalInfo.github}
-LinkedIn: ${personalInfo.linkedin}
-`;
+  return (
+    "\nPORTFOLIO DATA FOR " +
+    personalInfo.name.toUpperCase() +
+    "\n═══════════════════════════════════\n" +
+    "\n── IDENTITY ──\n" +
+    "Name:     " + personalInfo.name + "\n" +
+    "Role:     " + personalInfo.title + "\n" +
+    "Tagline:  " + personalInfo.tagline + "\n" +
+    "\n── ABOUT ──\n" +
+    personalInfo.bio + "\n" +
+    "\n── SKILLS ──\n" +
+    skillsList + "\n" +
+    "\n── PROJECTS ──\n" +
+    projectList + "\n" +
+    "\n── EDUCATION ──\n" +
+    educationList + "\n" +
+    "\n── CERTIFICATIONS ──\n" +
+    certificationList + "\n" +
+    "\n── CONTACT ──\n" +
+    "Email:    " + personalInfo.email + "\n" +
+    "Phone:    " + personalInfo.phone + "\n" +
+    "Location: " + personalInfo.location + "\n" +
+    "GitHub:   " + personalInfo.github + "\n" +
+    "LinkedIn: " + personalInfo.linkedin + "\n"
+  );
 }
