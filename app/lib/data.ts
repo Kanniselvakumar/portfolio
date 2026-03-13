@@ -9,37 +9,55 @@ import {
 
 export function getPortfolioContext(): string {
   const skillsList = skills
-    .map(
-      (category) =>
-        `  • ${category.category}: ${category.items
-          .map((item) => item.name)
-          .join(", ")}`
-    )
+    .map((category) => {
+      const items = category.items.map((item) => item.name).join(", ");
+      return "  • " + category.category + ": " + items;
+    })
     .join("\n");
 
   const projectList = projects
     .map((p) => {
-      const liveLink = p.live ? `\n    Live: ${p.live}` : "";
+      let text =
+        "  • " +
+        p.title +
+        "\n    " +
+        p.description +
+        "\n    Tags: " +
+        p.tags.join(", ") +
+        "\n    GitHub: " +
+        p.github;
 
-      return `  • ${p.title}
-    ${p.description}
-    Tags: ${p.tags.join(", ")}
-    GitHub: ${p.github}${liveLink}`;
+      if (p.live) {
+        text += "\n    Live: " + p.live;
+      }
+
+      return text;
     })
     .join("\n\n");
 
   const educationList = education
-    .map(
-      (e) =>
-        `  • ${e.degree} — ${e.institution}, ${e.location} (${e.period}) | Score: ${e.score}`
-    )
+    .map((e) => {
+      return (
+        "  • " +
+        e.degree +
+        " — " +
+        e.institution +
+        ", " +
+        e.location +
+        " (" +
+        e.period +
+        ") | Score: " +
+        e.score
+      );
+    })
     .join("\n");
 
   const certificationList = certifications
-    .map((c) => `  • ${c.title} by ${c.issuer}`)
+    .map((c) => "  • " + c.title + " by " + c.issuer)
     .join("\n");
 
-  return `PORTFOLIO DATA FOR ${personalInfo.name.toUpperCase()}
+  return `
+PORTFOLIO DATA FOR ${personalInfo.name.toUpperCase()}
 ═══════════════════════════════════
 
 ── IDENTITY ──
