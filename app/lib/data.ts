@@ -18,10 +18,10 @@ export function getPortfolioContext(): string {
     .join("\n");
 
   const projectList = projects
-  .map(
-    (p) =>
-      `  • ${p.title}\n    ${p.description}\n    Tags: ${p.tags.join(", ")}\n    GitHub: ${p.github}${p.live ? `\n    Live: ${p.live}` : ""}`
-  )
+  .map((p) => {
+    const liveLink = p.live ? `\n    Live: ${p.live}` : "";
+    return `  • ${p.title}\n    ${p.description}\n    Tags: ${p.tags.join(", ")}\n    GitHub: ${p.github}${liveLink}`;
+  })
   .join("\n\n");
 
   const educationList = education
