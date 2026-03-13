@@ -173,13 +173,13 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-r from-[rgba(6,182,212,0.05)] to-[rgba(124,58,237,0.05)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="pointer-events-none absolute -inset-px rounded-2xl border border-white/5 group-hover:border-cyan-500/30 transition-colors duration-500" />
                 
-                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border border-white/15 bg-black/40 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-shadow duration-500">
+                <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl border border-white/15 bg-black/40 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-shadow duration-500">
                   <div className="absolute inset-0 bg-cyan-400/20 mix-blend-overlay animate-pulse" />
                   <Image
                     src="/profile.jpg"
                     alt={personalInfo.name}
                     fill
-                    sizes="80px"
+                    sizes="96px"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
