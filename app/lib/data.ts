@@ -5,56 +5,66 @@ import {
   projects,
   education,
   certifications,
-} from '../data/data';
+} from "../data/data";
 
 export function getPortfolioContext(): string {
   const skillsList = skills
-    .map((category) => `  • ${category.category}: ${category.items.map(item => item.name).join(", ")}`)
+    .map(
+      (category) =>
+        `  • ${category.category}: ${category.items
+          .map((item) => item.name)
+          .join(", ")}`
+    )
     .join("\n");
 
   const projectList = projects
     .map(
       (p) =>
-        `  • ${p.title}\n    ${p.description}\n    Tags: ${p.tags.join(", ")}\n    GitHub: ${p.github}${p.live ?\`\n    Live: ${p.live}\` : ""}`
+        `  • ${p.title}\n    ${p.description}\n    Tags: ${p.tags.join(
+          ", "
+        )}\n    GitHub: ${p.github}${p.live ? `\n    Live: ${p.live}` : ""}`
     )
     .join("\n\n");
 
   const educationList = education
-    .map((e) => `  • ${e.degree} — ${e.institution}, ${e.location} (${e.period}) | Score: ${e.score}`)
+    .map(
+      (e) =>
+        `  • ${e.degree} — ${e.institution}, ${e.location} (${e.period}) | Score: ${e.score}`
+    )
     .join("\n");
 
   const certificationList = certifications
     .map((c) => `  • ${c.title} by ${c.issuer}`)
     .join("\n");
 
-  return \`PORTFOLIO DATA FOR \${personalInfo.name.toUpperCase()}
+  return `PORTFOLIO DATA FOR ${personalInfo.name.toUpperCase()}
 ═══════════════════════════════════
 
 ── IDENTITY ──
-Name:     \${personalInfo.name}
-Role:     \${personalInfo.title}
-Tagline:  \${personalInfo.tagline}
+Name:     ${personalInfo.name}
+Role:     ${personalInfo.title}
+Tagline:  ${personalInfo.tagline}
 
 ── ABOUT ──
-\${personalInfo.bio}
+${personalInfo.bio}
 
 ── SKILLS ──
-\${skillsList}
+${skillsList}
 
 ── PROJECTS ──
-\${projectList}
+${projectList}
 
 ── EDUCATION ──
-\${educationList}
+${educationList}
 
 ── CERTIFICATIONS ──
-\${certificationList}
+${certificationList}
 
 ── CONTACT ──
-Email:    \${personalInfo.email}
-Phone:    \${personalInfo.phone}
-Location: \${personalInfo.location}
-GitHub:   \${personalInfo.github}
-LinkedIn: \${personalInfo.linkedin}
-\`;
+Email:    ${personalInfo.email}
+Phone:    ${personalInfo.phone}
+Location: ${personalInfo.location}
+GitHub:   ${personalInfo.github}
+LinkedIn: ${personalInfo.linkedin}
+`;
 }
