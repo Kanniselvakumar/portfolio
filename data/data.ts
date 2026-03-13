@@ -35,7 +35,24 @@ export const skills = [
         items: [
             { name: "Flask", level: 75 },
             { name: "Next.js", level: 60 },
+            { name: "NLTK", level: 80},
+            { name: "TextBlob", level: 70},
+            { name: "Scikit-learn", level: 60},
             { name: "MySQL", level: 80 },
+        ],
+    },
+    {
+        category: "Database",
+        items: [
+            { name: "MySQL", level: 80 },
+        ],
+    },
+    {
+        category: "Developer Tools",
+        items: [
+            { name: "Git", level: 80 },
+            { name: "GitHub", level: 85 },
+            { name: "VS Code", level: 70 },
         ],
     },
     {
@@ -44,6 +61,7 @@ export const skills = [
             { name: "Data Structures", level: 80 },
             { name: "OOP", level: 85 },
             { name: "NLP / ML", level: 70 },
+            { name: "DBMS", level: 90},
         ],
     },
 ];

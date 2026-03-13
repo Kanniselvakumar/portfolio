@@ -93,9 +93,9 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Message is required." }, { status: 400 });
         }
 
-        const apiKey = process.env.ANTHROPIC_API_KEY;
+        const apiKey = process.env.GROQ_API_KEY;
         if (!apiKey) {
-            console.error("ANTHROPIC_API_KEY is not set.");
+            console.error("GROQ_API_KEY is not set.");
             return NextResponse.json(
                 { error: "AI service is not configured." },
                 { status: 503 }
@@ -108,24 +108,25 @@ export async function POST(req: NextRequest) {
             { role: "user", content: message },
         ];
 
-        const response = await fetch("https://api.anthropic.com/v1/messages", {
+        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "x-api-key": apiKey,
-                "anthropic-version": "2023-06-01",
+                "Authorization": `Bearer ${apiKey}`,
             },
             body: JSON.stringify({
-                model: "claude-haiku-4-5-20251001",  // latest fast model
+                model: "llama-3.3-70b-versatile",
                 max_tokens: 512,
-                system: buildSystemPrompt(),
-                messages,
+                messages: [
+                    { role: "system", content: buildSystemPrompt() },
+                    ...messages,
+                ],
             }),
         });
 
         if (!response.ok) {
             const err = await response.text();
-            console.error("Anthropic API error:", err);
+            console.error("Groq API error:", err);
             return NextResponse.json(
                 { error: "AI service unavailable. Please try again later." },
                 { status: 502 }
@@ -134,7 +135,7 @@ export async function POST(req: NextRequest) {
 
         const data = await response.json();
         const answer =
-            data.content?.find((block: { type: string }) => block.type === "text")?.text ??
+            data.choices?.[0]?.message?.content ??
             "I couldn't generate a response. Please try again.";
 
         return NextResponse.json({ answer });

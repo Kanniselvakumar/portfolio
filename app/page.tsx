@@ -7,6 +7,7 @@ import {
   education,
   navLinks,
 } from "./data/data";
+import Experience from "./components/Experiences";
 import AIAssistant from "./components/ai-assistant";
 import ContactForm from "./components/contact-form";
 
@@ -453,6 +454,9 @@ export default function Home() {
             )}
           </div>
         </section>
+
+        {/* Experience */}
+        <Experience />
 
         {/* Certifications */}
         <section id="certifications" className="space-y-6">

@@ -1,45 +1,11 @@
 "use client";
 import type React from "react";
 import { useState, useRef, useEffect } from "react";
-import { personalInfo, skills, projects, certifications, education } from "../data/data";
 
 interface Message {
     role: "user" | "assistant";
     content: string;
 }
-
-const SYSTEM_PROMPT = `You are an AI assistant embedded in Kanniselvakumar K's personal portfolio website. Your job is to help visitors learn about Kanniselvakumar in a friendly, concise, and professional way.
-
-Here is everything you know about him:
-
-PERSONAL:
-- Name: Kanniselvakumar K
-- Location: Madurai, Tamil Nadu
-- Email: ${personalInfo.email}
-- Phone: ${personalInfo.phone}
-- GitHub: ${personalInfo.github}
-- LinkedIn: ${personalInfo.linkedin}
-- Bio: ${personalInfo.bio}
-
-EDUCATION:
-${education.map((e) => `- ${e.degree} at ${e.institution}, ${e.location}${e.score ? ` (${e.score})` : ""}${e.current ? " [Currently Enrolled]" : ""}`).join("\n")}
-
-SKILLS:
-${skills.map((g) => `${g.category}: ${g.items.map((s) => s.name).join(", ")}`).join("\n")}
-
-PROJECTS:
-${projects.map((p) => `- ${p.title}: ${p.description} | Tech: ${p.tags.join(", ")}`).join("\n")}
-
-CERTIFICATIONS:
-${certifications.map((c) => `- ${c.title} by ${c.issuer}`).join("\n")}
-
-GUIDELINES:
-- Keep answers short (2-4 sentences max) unless asked for detail
-- Be friendly, enthusiastic, and professional
-- If asked about contact, share his email: ${personalInfo.email}
-- If asked something you don't know, say you're not sure but suggest contacting him directly
-- You can use simple markdown like **bold** for emphasis
-- Never make up information not listed above`;
 
 export default function AIAssistant() {
     const [open, setOpen] = useState(false);
@@ -47,7 +13,7 @@ export default function AIAssistant() {
         {
             role: "assistant",
             content:
-                "Hi! I’m Kanniselvakumar’s assistant. Ask about his skills, projects, or how to get in touch.",
+                "Hi! I'm Kanniselvakumar's assistant. Ask about his skills, projects, or how to get in touch.",
         },
     ]);
     const [input, setInput] = useState("");
@@ -86,23 +52,18 @@ export default function AIAssistant() {
         setLoading(true);
 
         try {
-            const response = await fetch("https://api.anthropic.com/v1/messages", {
+            // ✅ Call your own API route — no CORS, no exposed key
+            const response = await fetch("/api/assistant", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    model: "claude-sonnet-4-20250514",
-                    max_tokens: 1000,
-                    system: SYSTEM_PROMPT,
-                    messages: newMessages.map((m) => ({
-                        role: m.role,
-                        content: m.content,
-                    })),
+                    message: text,
+                    history: messages, // send conversation history for context
                 }),
             });
 
             const data = await response.json();
-            const reply =
-                data?.content?.[0]?.text ?? "Sorry, I couldn't get a response. Try again!";
+            const reply = data?.answer ?? "Sorry, I couldn't get a response. Try again!";
 
             setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
         } catch {
@@ -214,7 +175,7 @@ export default function AIAssistant() {
                         </div>
 
                         <div>
-                            <p className="text-white font-semibold text-sm font-mono">Kanni's Assistant</p>
+                            <p className="text-white font-semibold text-sm font-mono">Kanniselvakumar's Assistant</p>
                             <p className="text-emerald-400 text-xs font-mono flex items-center gap-1">
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                                 Online · Portfolio assistant

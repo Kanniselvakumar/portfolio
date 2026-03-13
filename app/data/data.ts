@@ -35,7 +35,24 @@ export const skills = [
         items: [
             { name: "Flask", level: 75 },
             { name: "Next.js", level: 60 },
+            { name: "NLTK", level: 80},
+            { name: "TextBlob", level: 70},
+            { name: "Scikit-learn", level: 60},
             { name: "MySQL", level: 80 },
+        ],
+    },
+    {
+        category: "Database",
+        items: [
+            { name: "MySQL", level: 80 },
+        ],
+    },
+    {
+        category: "Developer Tools",
+        items: [
+            { name: "Git", level: 80 },
+            { name: "GitHub", level: 85 },
+            { name: "VS Code", level: 70 },
         ],
     },
     {
@@ -44,6 +61,7 @@ export const skills = [
             { name: "Data Structures", level: 80 },
             { name: "OOP", level: 85 },
             { name: "NLP / ML", level: 70 },
+            { name: "DBMS", level: 90},
         ],
     },
 ];
@@ -81,6 +99,61 @@ export const projects = [
         live: "",
         featured: true,
         icon: "🧠",
+    },
+];
+
+export const experiences = [
+    {
+        id: 1,
+        company: "JPMorgan Chase & Co.",
+        role: "Software Engineering Virtual Internship",
+        period: "January 2026",
+        type: "Virtual Experience",
+        logo: "JP",
+        icon: "🏦",
+        color: "from-blue-900/30 to-blue-800/10",
+        accentColor: "rgba(0,48,135,0.15)",
+        borderColor: "rgba(0,48,135,0.4)",
+        logoColor: "#4a90d9",
+        description:
+            "Completed a software engineering job simulation through Forage, gaining hands-on experience with enterprise-grade backend technologies used at JPMorgan Chase. Worked on real-world tasks including setting up project infrastructure, integrating Kafka for event-driven communication, and designing REST API controllers",
+        tasks: [
+            "Project Setup & Configuration",
+            "Kafka Integration",
+            "H2 In-Memory Database Integration",
+            "REST API Integration",
+            "REST API Controller Design",
+        ],
+        certificate: {
+            url: "/JP_Morgan_Course_Completion_Certificate.pdf",
+            label: "View Certificate",
+        },
+    },
+    {
+        id: 2,
+        company: "Amazon Web Services",
+        role: "AWS Cloud Virtual Internship",
+        period: "2025",
+        type: "Virtual Experience",
+        logo: "AWS",
+        icon: "☁️",
+        color: "from-orange-900/20 to-yellow-800/10",
+        accentColor: "rgba(255,153,0,0.10)",
+        borderColor: "rgba(255,153,0,0.35)",
+        logoColor: "#FF9900",
+        description:
+            "Completed an AWS Cloud virtual internship through Forage, gaining practical exposure to cloud architecture and infrastructure design. Worked with core AWS services including EC2, S3, and Lambda, applying best practices in cloud security and serverless computing.",
+            tasks: [
+            "Cloud Fundamentals & Architecture",
+            "AWS Core Services (EC2, S3, Lambda)",
+            "Cloud Security Best Practices",
+            "Serverless Computing",
+            "Cloud Deployment & Monitoring",
+        ],
+        certificate: {
+            url: "/AWS Virtual internship certificate.pdf",
+            label: "View Certificate",
+        },
     },
 ];
 
@@ -147,6 +220,7 @@ export const navLinks = [
     { label: "About", href: "#about" },
     { label: "Skills", href: "#skills" },
     { label: "Projects", href: "#projects" },
+    { label: "Experience", href: "#experience" },
     { label: "Certifications", href: "#certifications" },
     { label: "Contact", href: "#contact" },
 ];
