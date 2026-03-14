@@ -5,6 +5,7 @@ import {
   projects,
   education,
   certifications,
+  experiences,  // ← add this import
 } from "../data/data";
 
 export function getPortfolioContext(): string {
@@ -56,6 +57,25 @@ export function getPortfolioContext(): string {
     .map((c) => "  • " + c.title + " by " + c.issuer)
     .join("\n");
 
+  // ← NEW: experience block
+  const experienceList = experiences
+    .map((exp) => {
+      return (
+        "  • " +
+        exp.company +
+        " — " +
+        exp.role +
+        " (" +
+        exp.period +
+        ")" +
+        "\n    " +
+        exp.description +
+        "\n    Tasks: " +
+        exp.tasks.join(", ")
+      );
+    })
+    .join("\n\n");
+
   return (
     "\nPORTFOLIO DATA FOR " +
     personalInfo.name.toUpperCase() +
@@ -70,6 +90,8 @@ export function getPortfolioContext(): string {
     skillsList + "\n" +
     "\n── PROJECTS ──\n" +
     projectList + "\n" +
+    "\n── EXPERIENCE ──\n" +       // ← NEW section
+    experienceList + "\n" +
     "\n── EDUCATION ──\n" +
     educationList + "\n" +
     "\n── CERTIFICATIONS ──\n" +

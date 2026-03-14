@@ -6,7 +6,8 @@ import {
     projects,
     certifications,
     education,
-} from "../../../data/data";
+    experiences,          // ← ADD THIS
+} from "../../data/data";
 
 // ── Build a rich system prompt from data.ts ──────────────────
 
@@ -32,6 +33,14 @@ function buildSystemPrompt(): string {
                 `  • ${e.degree} — ${e.institution}, ${e.location}${e.score ? ` | Score: ${e.score}` : ""}${e.period ? ` (${e.period})` : ""}${e.current ? " [Currently Enrolled]" : ""}`
         )
         .join("\n");
+
+    // ── ADD THIS BLOCK ──
+    const experienceList = experiences
+        .map(
+            (exp) =>
+                `  • ${exp.company} — ${exp.role} (${exp.period})\n    ${exp.description}\n    Tasks: ${exp.tasks.join(", ")}`
+        )
+        .join("\n\n");
 
     return `You are an AI assistant embedded in ${personalInfo.name}'s personal portfolio website.
 Your sole purpose is to answer questions about ${personalInfo.name} based on the verified data below.
@@ -59,6 +68,9 @@ ${skillList}
 
 ── PROJECTS ──
 ${projectList}
+
+── EXPERIENCE ──
+${experienceList}
 
 ── CERTIFICATIONS ──
 ${certList}
