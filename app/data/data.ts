@@ -35,9 +35,9 @@ export const skills = [
         items: [
             { name: "Flask", level: 75 },
             { name: "Next.js", level: 60 },
-            { name: "NLTK", level: 80},
-            { name: "TextBlob", level: 70},
-            { name: "Scikit-learn", level: 60},
+            { name: "NLTK", level: 80 },
+            { name: "TextBlob", level: 70 },
+            { name: "Scikit-learn", level: 60 },
             { name: "MySQL", level: 80 },
         ],
     },
@@ -61,7 +61,7 @@ export const skills = [
             { name: "Data Structures", level: 80 },
             { name: "OOP", level: 85 },
             { name: "NLP / ML", level: 70 },
-            { name: "DBMS", level: 90},
+            { name: "DBMS", level: 90 },
         ],
     },
 ];
@@ -125,7 +125,7 @@ export const experiences = [
             "REST API Controller Design",
         ],
         certificate: {
-            url: "/JP_Morgan_Course_Completion_Certificate.pdf",
+            url: "/jp_morgan_certificate.pdf",
             label: "View Certificate",
         },
     },
@@ -143,7 +143,7 @@ export const experiences = [
         logoColor: "#FF9900",
         description:
             "Completed an AWS Cloud virtual internship through Forage, gaining practical exposure to cloud architecture and infrastructure design. Worked with core AWS services including EC2, S3, and Lambda, applying best practices in cloud security and serverless computing.",
-            tasks: [
+        tasks: [
             "Cloud Fundamentals & Architecture",
             "AWS Core Services (EC2, S3, Lambda)",
             "Cloud Security Best Practices",
