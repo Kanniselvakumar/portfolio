@@ -120,28 +120,41 @@ export default function Home() {
             </div>
 
             <div className="space-y-3 max-w-xl">
-              <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-                Software developer crafting{" "}
-                <span className="text-gradient">practical</span>, polished projects.
+              <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl leading-tight">
+                Software Developer specializing in{" "}
+                <span className="text-gradient">Full-Stack &amp; AI-driven</span>{" "}
+                applications.
               </h1>
-              <p className="text-base font-medium text-slate-200/90">
-                {personalInfo.name} • {personalInfo.title}
+              <p className="text-xl font-medium text-slate-300 mt-2 leading-relaxed">
+                I build scalable systems and intelligent solutions that solve real-world problems.
               </p>
-              <p className="text-sm leading-relaxed text-slate-300">
-                {personalInfo.bio}
-              </p>
+              <div className="flex items-center gap-3 text-sm font-medium text-slate-400 mt-2">
+                <span>{personalInfo.name}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-500/50"></span>
+                <span>{personalInfo.title}</span>
+              </div>
             </div>
 
             <div className="flex flex-wrap gap-3 pt-1">
               <a
                 href="#projects"
-                className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold btn-primary shine"
+                className="inline-flex h-10 items-center justify-center rounded-xl px-5 text-sm font-semibold btn-primary shine transition-all duration-300 hover:scale-105"
               >
                 View projects
               </a>
               <a
+                href={personalInfo.resumeUrl}
+                download="resume.pdf"
+                className="inline-flex h-10 items-center justify-center rounded-xl px-5 text-sm font-semibold text-white shadow-[0_0_20px_rgba(34,211,238,0.2)] hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] transition-all duration-300 hover:scale-105 bg-gradient-to-r from-cyan-600 to-blue-600 border border-cyan-400/30 hover:border-cyan-300"
+              >
+                <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Download Resume
+              </a>
+              <a
                 href={`mailto:${personalInfo.email}`}
-                className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold btn-secondary"
+                className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold btn-secondary transition-all duration-300 hover:scale-[1.03]"
               >
                 Let&apos;s talk
               </a>
@@ -149,7 +162,7 @@ export default function Home() {
                 href={personalInfo.github}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold btn-secondary"
+                className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold btn-secondary transition-all duration-300 hover:scale-[1.03]"
               >
                 GitHub
               </a>
@@ -157,7 +170,7 @@ export default function Home() {
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold btn-secondary"
+                className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold btn-secondary transition-all duration-300 hover:scale-[1.03]"
               >
                 LinkedIn
               </a>
