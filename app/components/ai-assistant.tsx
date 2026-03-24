@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 
@@ -22,8 +23,27 @@ const userBubbleSurface =
 const quickQuestionSurface =
   "linear-gradient(135deg, rgba(13,22,33,0.92), rgba(24,21,37,0.92))";
 
+function AssistantAvatar({
+  size,
+  className = "",
+}: {
+  size: number;
+  className?: string;
+}) {
+  return (
+    <Image
+      src="/assistant-avatar.svg"
+      alt=""
+      width={size}
+      height={size}
+      className={`h-full w-full object-contain ${className}`}
+    />
+  );
+}
+
 export default function AIAssistant() {
   const [open, setOpen] = useState(false);
+  const [showAvailabilityToast, setShowAvailabilityToast] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -55,6 +75,27 @@ export default function AIAssistant() {
 
     const timeoutId = window.setTimeout(() => inputRef.current?.focus(), 180);
     return () => window.clearTimeout(timeoutId);
+  }, [open]);
+
+  useEffect(() => {
+    const showTimeoutId = window.setTimeout(() => {
+      setShowAvailabilityToast(true);
+    }, 700);
+
+    const hideTimeoutId = window.setTimeout(() => {
+      setShowAvailabilityToast(false);
+    }, 5200);
+
+    return () => {
+      window.clearTimeout(showTimeoutId);
+      window.clearTimeout(hideTimeoutId);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (open) {
+      setShowAvailabilityToast(false);
+    }
   }, [open]);
 
   const sendMessage = async (messageOverride?: string) => {
@@ -148,6 +189,43 @@ export default function AIAssistant() {
   return (
     <>
       <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-2.5 sm:bottom-5 sm:right-5">
+        {!open && showAvailabilityToast && (
+          <div className="relative mr-1 animate-toast-in">
+            <div
+              className="relative overflow-hidden rounded-2xl border px-4 py-3"
+              style={{
+                background: assistantPanelSurface,
+                borderColor: "rgba(34,211,238,0.18)",
+                boxShadow:
+                  "0 18px 36px rgba(0,0,0,0.34), 0 0 18px rgba(34,211,238,0.10)",
+              }}
+            >
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(34,211,238,0.10), rgba(236,72,153,0.10))",
+                }}
+              />
+              <p className="relative font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--accent)]">
+                AI Assistant Available
+              </p>
+              <p className="relative mt-1 text-sm font-medium text-slate-100">
+                Ask anything about the portfolio.
+              </p>
+              <div
+                aria-hidden="true"
+                className="absolute -bottom-1.5 right-6 h-3 w-3 rotate-45 border-b border-r"
+                style={{
+                  background: "rgba(9,13,22,0.98)",
+                  borderColor: "rgba(34,211,238,0.18)",
+                }}
+              />
+            </div>
+          </div>
+        )}
+
         {!open && (
           <div className="relative mr-1 animate-float-soft">
             <div
@@ -248,19 +326,7 @@ export default function AIAssistant() {
                 />
               </svg>
             ) : (
-              <svg
-                className="h-4.5 w-4.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.7}
-                  d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714a2.25 2.25 0 0 0 1.357 2.059l.096.04A2.25 2.25 0 0 1 17.25 13.5h.649M9.75 3.104A23.963 23.963 0 0 1 12 3c.97 0 1.927.057 2.867.166M3 16.5v.75A2.25 2.25 0 0 0 5.25 19.5h1.5M3 16.5h2.25M21 16.5v.75A2.25 2.25 0 0 1 18.75 19.5h-1.5M21 16.5h-2.25M12 19.5V21m0-1.5a2.25 2.25 0 0 0 2.25-2.25M12 19.5a2.25 2.25 0 0 1-2.25-2.25m4.5 0h-4.5"
-                />
-              </svg>
+              <AssistantAvatar size={38} />
             )}
           </span>
 
@@ -319,23 +385,11 @@ export default function AIAssistant() {
             <div
               className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10"
               style={{
-                background: assistantGradient,
-                boxShadow: "0 10px 18px rgba(34,211,238,0.16)",
+                background: "rgba(255,255,255,0.08)",
+                boxShadow: "0 10px 18px rgba(34,211,238,0.12)",
               }}
             >
-              <svg
-                className="h-4.5 w-4.5 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.6}
-                  d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714a2.25 2.25 0 0 0 1.357 2.059l.096.04A2.25 2.25 0 0 1 17.25 13.5h.649"
-                />
-              </svg>
+              <AssistantAvatar size={34} />
               <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#070a12] bg-[var(--accent)]" />
             </div>
 
@@ -386,13 +440,7 @@ export default function AIAssistant() {
                         "linear-gradient(135deg, rgba(34,211,238,0.16), rgba(236,72,153,0.16))",
                     }}
                   >
-                    <svg
-                      className="h-3 w-3 text-white"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
+                    <AssistantAvatar size={22} />
                   </div>
                 )}
 
@@ -432,13 +480,7 @@ export default function AIAssistant() {
                       "linear-gradient(135deg, rgba(34,211,238,0.16), rgba(236,72,153,0.16))",
                   }}
                 >
-                  <svg
-                    className="h-3 w-3 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
+                  <AssistantAvatar size={22} />
                 </div>
                 <div
                   className="rounded-2xl rounded-tl-sm border px-4 py-2.5 font-mono text-sm text-[var(--accent)]"
@@ -520,6 +562,11 @@ export default function AIAssistant() {
       </div>
 
       <style>{`
+        @keyframes toast-in {
+          0% { transform: translateY(8px) scale(0.96); opacity: 0; }
+          100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
         @keyframes assistant-glow {
           0%, 100% { transform: scale(1); opacity: 0.4; }
           50% { transform: scale(1.04); opacity: 0.82; }
@@ -535,6 +582,7 @@ export default function AIAssistant() {
           50% { transform: scale(0.82); opacity: 0.6; }
         }
 
+        .animate-toast-in { animation: toast-in 320ms ease-out; }
         .animate-assistant-glow { animation: assistant-glow 2.8s ease-in-out infinite; }
         .animate-float-soft { animation: float-soft 2.8s ease-in-out infinite; }
         .animate-pulse-soft { animation: pulse-soft 1.8s ease-in-out infinite; }
