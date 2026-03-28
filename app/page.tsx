@@ -104,11 +104,11 @@ export default function Home() {
       </header>
 
       {/* Main container */}
-      <div className="mx-auto flex max-w-6xl flex-col gap-20 px-4 pb-24 pt-12 md:pt-20">
+      <div className="mx-auto flex max-w-6xl flex-col gap-20 px-4 pb-24 pt-0">
         {/* Hero */}
         <section
           id="hero"
-          className="grid gap-10 md:min-h-[420px] md:grid-cols-12 md:items-center md:gap-14"
+          className="grid gap-10 md:grid-cols-12 md:items-center md:gap-14 pt-2 md:pt-4"
         >
           {/* Left: intro */}
           <div className="space-y-7 md:col-span-7">
@@ -181,30 +181,36 @@ export default function Home() {
           <div className="md:col-span-5 md:justify-self-end">
             <div className="space-y-4 max-w-sm ml-auto">
               {/* Profile card */}
-              <div className="group relative card card-hover rounded-2xl p-5 flex items-center gap-4 overflow-hidden">
+              <div className="group relative rounded-3xl p-6 flex flex-col items-center gap-5 overflow-hidden text-center bg-gradient-to-b from-[rgba(15,23,42,0.4)] to-[rgba(7,10,18,0.8)] border border-white/5 backdrop-blur-xl shadow-2xl transition-all duration-500 hover:border-cyan-500/30 hover:bg-[rgba(15,23,42,0.6)]">
                 {/* Advanced Glow Background */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[rgba(6,182,212,0.05)] to-[rgba(124,58,237,0.05)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="pointer-events-none absolute -inset-px rounded-2xl border border-white/5 group-hover:border-cyan-500/30 transition-colors duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[rgba(6,182,212,0.08)] to-[rgba(124,58,237,0.08)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="pointer-events-none absolute -inset-px rounded-3xl border border-white/5 group-hover:border-cyan-500/30 transition-colors duration-500" />
                 
-                <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl border border-white/15 bg-black/40 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-shadow duration-500">
-                  <div className="absolute inset-0 bg-cyan-400/20 mix-blend-overlay animate-pulse" />
+                <div className="relative w-40 sm:w-48 aspect-[4/5] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_0_30px_rgba(0,0,0,0.6)] group-hover:border-cyan-500/40 group-hover:shadow-[0_0_40px_rgba(6,182,212,0.3)] transition-all duration-500">
+                  <div className="absolute inset-0 bg-cyan-400/10 mix-blend-overlay animate-pulse" />
                   <Image
                     src="/profile.jpg"
                     alt={personalInfo.name}
                     fill
-                    sizes="96px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="(max-width: 640px) 192px, 224px"
+                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    priority
+                    quality={100}
                   />
                 </div>
-                <div className="min-w-0 relative z-10">
-                  <p className="text-xs font-mono uppercase tracking-[0.16em] text-cyan-400/80 mb-1">
+                <div className="relative z-10 w-full">
+                  <p className="text-xs font-mono uppercase tracking-[0.2em] text-cyan-400 mb-2 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">
                     Portfolio
                   </p>
-                  <p className="text-sm font-semibold text-white group-hover:text-cyan-50 transition-colors">
+                  <p className="text-xl font-bold tracking-tight text-white group-hover:text-cyan-50 transition-colors">
                     {personalInfo.name}
                   </p>
-                  <p className="text-xs text-slate-300 truncate group-hover:text-cyan-100/70 transition-colors">
-                    {personalInfo.title} · {personalInfo.location}
+                  <div className="h-px w-12 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent mx-auto my-3" />
+                  <p className="text-sm font-medium text-slate-300 group-hover:text-cyan-100/80 transition-colors">
+                    {personalInfo.title}
+                  </p>
+                  <p className="text-xs text-slate-400 mt-1">
+                    {personalInfo.location}
                   </p>
                 </div>
               </div>
