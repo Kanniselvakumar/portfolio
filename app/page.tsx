@@ -192,7 +192,7 @@ export default function Home() {
                     src="/profile.jpg"
                     alt={personalInfo.name}
                     fill
-                    sizes="(max-width: 640px) 192px, 224px"
+                    sizes="(max-width: 768px) 600px, 1200px"
                     className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     priority
                     quality={100}
