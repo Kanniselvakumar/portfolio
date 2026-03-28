@@ -10,6 +10,7 @@ import {
 import Experience from "./components/Experiences";
 import AIAssistant from "./components/ai-assistant";
 import ContactForm from "./components/contact-form";
+import VisitorCounter from "./components/visitor-counter";
 
 export default function Home() {
   const featuredProjects = projects.filter((p) => p.featured);
@@ -24,6 +25,8 @@ export default function Home() {
         <div className="absolute inset-0 opacity-[0.55] bg-grid" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/40" />
       </div>
+
+      <VisitorCounter />
 
       {/* Navbar */}
       <header className="sticky top-0 z-40 border-b border-white/10 bg-[color:rgba(7,10,18,0.72)] backdrop-blur">
@@ -591,7 +594,7 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-white/5 pt-8 text-xs text-slate-400">
+        <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-white/5 pt-8 text-xs text-slate-400">
           <p>
             © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
           </p>
