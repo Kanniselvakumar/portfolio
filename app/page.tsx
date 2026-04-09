@@ -399,55 +399,99 @@ export default function Home() {
 
           <div className="space-y-5">
             {(featuredProjects.length ? featuredProjects : projects).map(
-              (project, index) => (
+              (project, index) => {
+                const proj = project as typeof project & { image?: string };
+                return (
                 <article
                   key={project.id}
-                  className="relative group overflow-hidden rounded-2xl border border-white/10 bg-[rgba(10,12,24,0.9)] p-5 md:p-6 transition-all duration-300 hover:border-white/25 hover:shadow-[0_24px_80px_rgba(0,0,0,0.75)] hover:-translate-y-1 hover:rotate-[0.15deg]"
+                  className="relative group overflow-hidden rounded-2xl border border-white/10 bg-[rgba(10,12,24,0.9)] transition-all duration-300 hover:border-white/25 hover:shadow-[0_24px_80px_rgba(0,0,0,0.75)] hover:-translate-y-1 hover:rotate-[0.15deg]"
                 >
                   {/* Glow background */}
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0"
                     style={{
                       background:
                         "radial-gradient(circle at 0% 0%, rgba(34,211,238,0.35), transparent 55%), radial-gradient(circle at 100% 100%, rgba(236,72,153,0.35), transparent 55%)",
                     }}
                   />
 
-                  <div className="relative flex flex-col gap-4 md:flex-row md:items-start">
-                    {/* Index + icon */}
-                    <div className="flex items-start gap-3 md:w-1/3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-black/30 text-xl">
-                        <span aria-hidden="true">{project.icon}</span>
-                      </div>
-                      <div className="leading-tight">
-                        <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-muted">
-                          Project {String(index + 1).padStart(2, "0")}
-                        </p>
-                        <h3 className="mt-1 text-sm font-semibold text-white">
-                          {project.title}
-                        </h3>
-                      </div>
-                    </div>
+                  {/* Card inner: portrait image LEFT + content RIGHT */}
+                  <div className="relative z-10 flex flex-row min-h-[200px]">
 
-                    {/* Content */}
-                    <div className="md:w-2/3">
-                      <p className="text-sm leading-relaxed text-slate-200">
+                    {/* ── Portrait image panel (left, fixed width, full height) ── */}
+                    {proj.image && (
+                      <div className="relative w-44 md:w-56 shrink-0 self-stretch overflow-hidden rounded-l-2xl">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={proj.image}
+                          alt={`${project.title} cover`}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        {/* Right-edge gradient fading into card background */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(10,12,24,0.15)] to-[rgba(10,12,24,0.88)]" />
+                        {/* Index badge top-left */}
+                        <div className="absolute top-3 left-3 text-[10px] font-mono font-bold text-cyan-400/90 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded border border-cyan-500/25">
+                          {String(index + 1).padStart(2, "0")}
+                        </div>
+                        {/* Emoji icon badge bottom-left */}
+                        <div className="absolute bottom-3 left-3 flex h-8 w-8 items-center justify-center rounded-lg border border-white/15 bg-black/60 backdrop-blur-sm text-base shadow-md">
+                          <span aria-hidden="true">{project.icon}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* ── Content panel (right) ── */}
+                    <div className="flex flex-col justify-center gap-2.5 p-5 md:p-6 flex-1 min-w-0">
+
+                      {/* Fallback: icon + index when no image */}
+                      {!proj.image && (
+                        <div className="flex items-center gap-3 mb-1">
+                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-black/30 text-lg">
+                            <span aria-hidden="true">{project.icon}</span>
+                          </div>
+                          <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-muted">
+                            Project {String(index + 1).padStart(2, "0")}
+                          </p>
+                        </div>
+                      )}
+
+                      {/* Title */}
+                      <h3 className="text-sm font-bold text-white group-hover:text-cyan-50 transition-colors leading-snug">
+                        {project.title}
+                      </h3>
+
+                      {/* Short description */}
+                      <p className="text-xs leading-relaxed text-slate-400">
                         {project.description}
                       </p>
 
-                      <div className="mt-3 flex flex-wrap gap-2 text-[11px]">
+                      {/* Highlight bullet points */}
+                      {(proj as typeof proj & { highlights?: string[] }).highlights && (
+                        <ul className="space-y-1.5 mt-0.5">
+                          {(proj as typeof proj & { highlights?: string[] }).highlights!.map((point, pi) => (
+                            <li key={pi} className="flex items-start gap-2 text-xs text-slate-300 leading-relaxed">
+                              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cyan-500/80 shrink-0" />
+                              <span>{point}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+
+                      {/* Tech tags */}
+                      <div className="flex flex-wrap gap-1.5 pt-1">
                         {project.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="rounded-full border border-white/10 bg-black/30 px-2.5 py-0.5 text-slate-100"
+                            className="rounded-full border border-white/10 bg-black/30 px-2.5 py-0.5 text-[10px] text-slate-100"
                           >
                             {tag}
                           </span>
                         ))}
                       </div>
 
-                      <div className="mt-4 flex flex-wrap gap-2">
+                      {/* Action buttons */}
+                      <div className="flex flex-wrap gap-2 pt-1">
                         {project.github && (
                           <a
                             href={project.github}
@@ -472,9 +516,11 @@ export default function Home() {
                     </div>
                   </div>
                 </article>
-              )
+                );
+              }
             )}
           </div>
+
         </section>
 
         {/* Experience */}

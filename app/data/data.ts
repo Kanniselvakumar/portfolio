@@ -69,36 +69,54 @@ export const skills = [
 export const projects = [
     {
         id: 1,
-        title: "FitGuard – AI Fitness & Health Monitor",
+        title: "FitGuard – AI-Based Athlete Health & Injury Risk Monitoring",
         description:
-            "A smart fitness monitoring web app that tracks workouts, analyzes health metrics, and provides personalized AI-driven recommendations to help users stay on top of their fitness goals.",
-        tags: ["Python", "Flask", "MySQL", "HTML5", "CSS3", "JavaScript"],
+            "An AI-powered sports analytics platform that tracks athlete training sessions, calculates fatigue scores, and predicts injury risk in real time — helping coaches and athletes make smarter, data-driven decisions.",
+        highlights: [
+            "Built a Random Forest model to predict injury risk from training load, fatigue scores, and historical performance data.",
+            "Developed interactive dashboards with real-time recovery tracking and AI-driven training recommendations for performance optimization.",
+            "Integrated MySQL for session history and athlete profiles; exposed REST APIs via Flask consumed by a React.js frontend.",
+        ],
+        tags: ["Python", "Flask", "MySQL", "React.js", "Scikit-learn", "Pandas", "NumPy"],
         github: "https://github.com/Kanniselvakumar/fitguard-ai-athlete-injury-monitoring",
         live: "https://fitguard-frontend.onrender.com",
         featured: true,
         icon: "🛡️",
+        image: "/fitguard-cover.png",
     },
     {
         id: 2,
         title: "Plastic Cleanup & Sales System",
         description:
-            "A full-stack platform to organize eco-cleanup events and promote recycled products. Features volunteer coordination, gamification, real-time impact tracking, and a marketplace.",
+            "A full-stack sustainability platform that connects volunteers with local eco-cleanup events and drives recycled-product sales through an integrated marketplace — making environmental action measurable and rewarding.",
+        highlights: [
+            "Designed volunteer coordination flows with role-based access, event registration, and attendance tracking.",
+            "Implemented gamification (badges, leaderboards, eco-points) and real-time impact tracking to boost volunteer engagement.",
+            "Built a product marketplace for recycled goods powered by Flask + MySQL with cart, checkout, and inventory management.",
+        ],
         tags: ["Flask", "MySQL", "HTML5", "CSS3", "JavaScript"],
         github: "https://github.com/Kanniselvakumar/Plastic-cleanup-and-sales-system",
         live: "https://plastic-cleanup-and-sales-system.onrender.com",
         featured: true,
         icon: "🌿",
+        image: "/plastic-cleanup-cover.png",
     },
     {
         id: 3,
-        title: "Survey Response Summarization (NLP)",
+        title: "Survey Response Summarization using NLP",
         description:
-            "An NLP-based system that automatically analyzes and summarizes large volumes of open-ended survey responses using sentiment analysis and topic modeling.",
-        tags: ["Python", "NLTK", "TextBlob", "Scikit-learn", "NLP"],
+            "An intelligent NLP pipeline that ingests large volumes of open-ended survey responses and automatically surfaces key themes, sentiments, and actionable insights — eliminating hours of manual review.",
+        highlights: [
+            "Applied text preprocessing (tokenization, stopword removal, lemmatization) using NLTK to clean and normalize raw responses.",
+            "Performed sentiment analysis with TextBlob and topic modeling with Scikit-learn to extract key insights from unstructured data.",
+            "Generated structured summary reports with sentiment distribution charts and topic clusters for quick decision-making.",
+        ],
+        tags: ["Python", "NLP", "NLTK", "TextBlob", "Scikit-learn"],
         github: "https://github.com/Kanniselvakumar/survey-response-summarization-nlp",
         live: "https://survey-response-summarization-nlp.onrender.com",
         featured: true,
         icon: "🧠",
+        image: "/survey-nlp-cover.png",
     },
 ];
 
