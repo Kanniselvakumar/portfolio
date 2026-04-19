@@ -99,7 +99,7 @@ export const projects = [
         live: "https://plastic-cleanup-and-sales-system.onrender.com",
         featured: true,
         icon: "🌿",
-        image: "/plastic-cleanup-cover.png",
+        image: "/plastic-cleanup-and-sales-system-cover.png",
     },
     {
         id: 3,
@@ -116,7 +116,7 @@ export const projects = [
         live: "https://survey-response-summarization-nlp.onrender.com",
         featured: true,
         icon: "🧠",
-        image: "/survey-nlp-cover.png",
+        image: "/survey-cover.png",
     },
 ];
 

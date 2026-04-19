@@ -34,15 +34,15 @@ export default function Projects() {
 
               {/* Cover Image */}
               {project.image ? (
-                <div className="relative w-full h-48 overflow-hidden">
+                <div className="relative w-full h-48 overflow-hidden bg-[#0a1526]/50 flex items-center justify-center">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={project.image}
                     alt={`${project.title} cover`}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                   />
                   {/* Gradient overlay: fades image into card bg at the bottom */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#040e1c]/20 to-[#040e1c]" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#040e1c]/10 to-[#040e1c]" />
                   {/* Project icon badge */}
                   <div className="absolute bottom-3 left-4 text-3xl drop-shadow-lg select-none">
                     {project.icon}
